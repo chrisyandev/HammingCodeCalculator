@@ -52,10 +52,19 @@ public class App {
         return requestInputType();
     }
 
+    /**
+     * Generates all available code words (2^n) for a
+     * certain number of bits n.
+     *
+     * @param numOfDataBits number of data bits
+     * @param isEvenParity even or odd parity
+     * @return list of code words
+     */
     public static ArrayList<Codeword> generateAllCodewords(int numOfDataBits, boolean isEvenParity) {
         ArrayList<Codeword> codewords = new ArrayList<>();
         for (int i = 0; i < Math.pow(2, numOfDataBits); i++) {
             String dataWord = Integer.toBinaryString(i);
+            // dataWord string must all be of same length
             while (dataWord.length() < numOfDataBits) {
                 dataWord = "0" + dataWord;
             }

@@ -14,6 +14,7 @@ public class Codeword {
         setParityBits();
     }
 
+    /* Creates Bits to hold the codeword */
     private void initialize() {
         int dataBitsToPlace = dataWord.length();
         int position = 1;
@@ -28,6 +29,7 @@ public class Codeword {
         }
     }
 
+    /* Places data word bits starting from last bit */
     private void setDataBits() {
         int indexOfDataWord = dataWord.length() - 1;
         for (int i = bits.size() - 1; i >= 0; i--) {
@@ -45,6 +47,7 @@ public class Codeword {
         }
     }
 
+    /* Sets parity bit values */
     private void setParityBits() {
         for (int i = bits.size() - 1; i >= 0; i--) {
             Bit bit = bits.get(i);
@@ -66,6 +69,13 @@ public class Codeword {
         }
     }
 
+    /*
+    _ _ _ _ _ _ _
+    1 2 2 4 4 4 4
+        1   1 2 2
+                1
+    Adds up the bits at positions that have the same number
+     */
     private int sumOfBitsAffectingThisParity(int position) {
         int sum = 0;
         for (Bit b : bits) {
@@ -76,11 +86,12 @@ public class Codeword {
         return sum;
     }
 
+    /* Uses bitwise operator to determine if a number is a power of 2 */
     private boolean isParityBit(int a) {
         return a > 0 && ((a & (a - 1)) == 0);
     }
 
-    public void addBit(Bit b) {
+    private void addBit(Bit b) {
         if (!(b.isParity())) {
             b.calculateAffectedBits();
         }

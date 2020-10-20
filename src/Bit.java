@@ -32,6 +32,17 @@ public class Bit {
         return affectedBits;
     }
 
+    /**
+     * _ _ _ _ _ _ _
+     * 1 2 2 4 4 4 4
+     *     1   1 2 2
+     *             1
+     * At each non-parity position, there are a series of powers
+     * of twos that add up to the position number. When a bit at
+     * one of these positions is changed, the parity positions
+     * corresponding to the series of power of twos will also change.
+     * This method determines the series of power of twos.
+     */
     public void calculateAffectedBits() {
         int value = position;
         while (value > 1) {
@@ -42,6 +53,7 @@ public class Bit {
         }
     }
 
+    /* False means you should try a lower value */
     private boolean lessThanOrEqualToPosition(int value) {
         int sum = value;
         for (int v : affectedBits) {
@@ -53,7 +65,8 @@ public class Bit {
         return false;
     }
 
-    private static boolean isPowerOfTwo(int a) {
+    /* Uses bitwise operator to determine if a number is a power of 2 */
+    private boolean isPowerOfTwo(int a) {
         return a > 0 && ((a & (a - 1)) == 0);
     }
 }
